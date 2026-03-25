@@ -1,0 +1,7 @@
+{
+    "addon_id": "SG/Donations",
+    "group_id": "sgDonations",
+    "display_order": 10,
+    "debug_only": false,
+    "title": "SG Donations Settings"
+}

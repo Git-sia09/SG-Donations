@@ -1,0 +1,8 @@
+{
+    "addon_id": "SG/Donations",
+    "prefix": "donations",
+    "route_type": "admin",
+    "format": "basic",
+    "controller": "SG\\Donations:Donations",
+    "context": ""
+}

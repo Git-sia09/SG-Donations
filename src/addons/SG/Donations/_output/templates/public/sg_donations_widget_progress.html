@@ -1,0 +1,26 @@
+<xf:css>
+.sg-donations-progress-wrap { margin: 10px 0; }
+.sg-donations-bar-bg { background: #e0e0e0; border-radius: 4px; height: 20px; overflow: hidden; }
+.sg-donations-bar { background: #5cb85c; height: 20px; border-radius: 4px; transition: width 0.4s ease; }
+.sg-donations-amount { margin: 6px 0 2px; font-weight: bold; }
+.sg-donations-percent { margin: 0; color: #777; font-size: .9em; }
+</xf:css>
+
+<xf:widget-title>{$title}</xf:widget-title>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <div class="sg-donations-progress-wrap">
+                <div class="sg-donations-bar-bg">
+                    <div class="sg-donations-bar" style="width: {$percent}%;"></div>
+                </div>
+                <p class="sg-donations-amount">{$totalDonated|number_format} {$currency} <xf:phrase name="sg_donations_of" /> {$goal|number_format} {$currency}</p>
+                <p class="sg-donations-percent">{$percent}% <xf:phrase name="sg_donations_progress" /></p>
+            </div>
+            <div style="margin-top: 10px; text-align: center;">
+                <a href="{xf:link 'donations'}" class="button button--primary"><xf:phrase name="sg_donations_donate_now" /></a>
+            </div>
+        </div>
+    </div>
+</div>

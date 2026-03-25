@@ -1,0 +1,65 @@
+<xf:title>{$title}</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{$title}</h2>
+        <div class="block-body">
+
+            <xf:css>
+            .sg-donations-bar-bg { background: #e0e0e0; border-radius: 4px; height: 20px; overflow: hidden; margin-bottom: 8px; }
+            .sg-donations-bar { background: #5cb85c; height: 20px; border-radius: 4px; transition: width 0.4s ease; }
+            </xf:css>
+
+            <div class="sg-donations-bar-bg">
+                <div class="sg-donations-bar" style="width: {$percent}%;"></div>
+            </div>
+            <p><strong>{$totalDonated|number_format} {$currency}</strong> <xf:phrase name="sg_donations_raised" /> <xf:phrase name="sg_donations_of" /> <strong>{$goal|number_format} {$currency}</strong> ({$percent}%)</p>
+
+            <hr />
+
+            <xf:form action="{xf:link 'donations/donate'}" method="post" class="block">
+                <div class="block-body">
+                    <dl class="formRow">
+                        <dt><label class="formRow-label" for="ctrl_username"><xf:phrase name="sg_donations_donor" /></label></dt>
+                        <dd><input type="text" name="username" id="ctrl_username" value="{$username}" class="input" /></dd>
+                    </dl>
+                    <dl class="formRow">
+                        <dt><label class="formRow-label" for="ctrl_amount"><xf:phrase name="sg_donations_amount" /> ({$currency})</label></dt>
+                        <dd><input type="number" name="amount" id="ctrl_amount" value="" min="0.01" step="0.01" class="input" required /></dd>
+                    </dl>
+                    <dl class="formRow">
+                        <dt><label class="formRow-label" for="ctrl_message"><xf:phrase name="sg_donations_message" /></label></dt>
+                        <dd><textarea name="message" id="ctrl_message" class="input" rows="3"></textarea></dd>
+                    </dl>
+                </div>
+                <div class="block-footer">
+                    <xf:csrf />
+                    <xf:button type="submit" class="button--primary"><xf:phrase name="sg_donations_donate_now" /></xf:button>
+                </div>
+            </xf:form>
+
+            <xf:if is="$recentDonors|count">
+                <h3 class="block-header"><xf:phrase name="sg_donations_recent_donors" /></h3>
+                <table class="dataTable">
+                    <thead>
+                        <tr>
+                            <th><xf:phrase name="sg_donations_donor" /></th>
+                            <th><xf:phrase name="sg_donations_amount" /></th>
+                            <th><xf:phrase name="sg_donations_date" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xf:foreach loop="$recentDonors" value="$donor">
+                        <tr>
+                            <td>{$donor.username}</td>
+                            <td>{$donor.amount|number_format} {$donor.currency}</td>
+                            <td>{$donor.donation_date|date_dynamic}</td>
+                        </tr>
+                        </xf:foreach>
+                    </tbody>
+                </table>
+            </xf:if>
+
+        </div>
+    </div>
+</div>

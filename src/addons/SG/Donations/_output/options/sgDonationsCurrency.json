@@ -1,0 +1,14 @@
+{
+    "addon_id": "SG/Donations",
+    "option_id": "sgDonationsCurrency",
+    "option_group_id": "sgDonations",
+    "default_value": "USD",
+    "edit_format": "textbox",
+    "edit_format_params": "",
+    "data_type": "string",
+    "sub_options": "",
+    "validation_class": "",
+    "validation_method": "",
+    "display_order": 20,
+    "title": "Donation Currency"
+}

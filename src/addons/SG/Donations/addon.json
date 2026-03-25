@@ -1,0 +1,15 @@
+{
+    "legacy_addon_id": "",
+    "title": "SG Donations",
+    "description": "A donation tracking addon with progress bar widget for XenForo 2.3.10+",
+    "version_id": 1000010,
+    "version_string": "1.0.0",
+    "dev": "Git-sia09",
+    "dev_url": "",
+    "support_url": "",
+    "faq_url": "",
+    "require": {
+        "XF": [2031000, "XenForo 2.3.10+"]
+    },
+    "icon": ""
+}

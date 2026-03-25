@@ -1,0 +1,47 @@
+<xf:title><xf:phrase name="sg_donations_manage" /></xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header"><xf:phrase name="sg_donations_manage" /></h2>
+        <div class="block-body">
+            <xf:if is="$donations|count">
+                <table class="dataTable">
+                    <thead>
+                        <tr>
+                            <th><xf:phrase name="sg_donations_donor" /></th>
+                            <th><xf:phrase name="sg_donations_amount" /></th>
+                            <th><xf:phrase name="sg_donations_date" /></th>
+                            <th><xf:phrase name="sg_donations_visible" /></th>
+                            <th><xf:phrase name="sg_donations_actions" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xf:foreach loop="$donations" value="$donation">
+                        <tr>
+                            <td>{$donation.username}</td>
+                            <td>{$donation.amount|number_format} {$donation.currency}</td>
+                            <td>{$donation.donation_date|date_dynamic}</td>
+                            <td>
+                                <xf:form action="{xf:link 'donations/toggle-visible', $donation}" method="post">
+                                    <xf:csrf />
+                                    <input type="hidden" name="donation_id" value="{$donation.donation_id}" />
+                                    <xf:button type="submit" class="{xf:if '$donation.visible', 'button--primary', 'button'}">
+                                        <xf:if is="$donation.visible"><xf:phrase name="yes" /><xf:else /><xf:phrase name="no" /></xf:if>
+                                    </xf:button>
+                                </xf:form>
+                            </td>
+                            <td>
+                                <a href="{xf:link 'donations/delete', $donation}" class="button button--danger"><xf:phrase name="delete" /></a>
+                            </td>
+                        </tr>
+                        </xf:foreach>
+                    </tbody>
+                </table>
+
+                <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}" link="donations" />
+            <xf:else />
+                <p class="block-message"><xf:phrase name="sg_donations_none_found" /></p>
+            </xf:if>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+{
+    "addon_id": "SG/Donations",
+    "definition_id": "sg_donation_progress",
+    "definition_class": "SG\\Donations\\Widget\\DonationProgress"
+}

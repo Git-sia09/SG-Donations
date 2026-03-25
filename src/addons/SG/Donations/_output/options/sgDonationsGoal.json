@@ -1,0 +1,14 @@
+{
+    "addon_id": "SG/Donations",
+    "option_id": "sgDonationsGoal",
+    "option_group_id": "sgDonations",
+    "default_value": "1000",
+    "edit_format": "textbox",
+    "edit_format_params": "",
+    "data_type": "positivenumeric",
+    "sub_options": "",
+    "validation_class": "",
+    "validation_method": "",
+    "display_order": 10,
+    "title": "Donation Goal Amount"
+}
