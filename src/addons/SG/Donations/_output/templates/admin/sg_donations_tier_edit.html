@@ -1,0 +1,46 @@
+<xf:title>{{ $tier.tier_id ? phrase('sg_donations_edit_tier') : phrase('sg_donations_add_tier') }} — {{ $campaign.title }}</xf:title>
+
+<form method="post" action="{{ link('sg-donations/campaigns/tiers/save', $tier) }}" class="block">
+    <div class="block-container">
+        <xf:if is="!$tier.tier_id">
+            <input type="hidden" name="campaign_id" value="{{ $campaign.campaign_id }}" />
+        </xf:if>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_title') }}">
+            <input type="text" name="title" value="{{ $tier.title }}" class="input" required />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_description') }}">
+            <textarea name="description" class="input" rows="3">{{ $tier.description }}</textarea>
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_amount') }}" explain="{{ phrase('sg_donations_amount_must_be_positive') }}">
+            <input type="number" name="amount" value="{{ $tier.amount }}" class="input" min="0.01" step="0.01" required />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_duration_months') }}">
+            <input type="number" name="duration_months" value="{{ $tier.duration_months ?: 1 }}" class="input" min="1" required />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_user_groups') }}" explain="{{ phrase('sg_donations_restricted_group_not_allowed') }}">
+            <xf:foreach loop="$groups" value="$group">
+                <label class="formRow-choice">
+                    <input type="checkbox" name="user_group_ids[]" value="{{ $group.user_group_id }}"
+                        {{ ($tier.user_group_ids is not empty AND $group.user_group_id in $tier.user_group_ids) ? 'checked' : '' }} />
+                    {{ $group.title }}
+                </label>
+            </xf:foreach>
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_display_order') }}">
+            <input type="number" name="display_order" value="{{ $tier.display_order ?: 10 }}" class="input" min="0" />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_tier_active') }}">
+            <xf:checkbox name="active" value="1" checked="{{ $tier.active }}" />
+        </xf:form-row>
+
+        <xf:submit-row sticky="true" icon="save">{{ phrase('save') }}</xf:submit-row>
+    </div>
+    <xf:token />
+</form>

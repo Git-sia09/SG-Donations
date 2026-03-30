@@ -1,0 +1,117 @@
+<xf:title>{{ phrase('sg_donations_add_donation') }}</xf:title>
+
+<form method="post" action="{{ link('sg-donations/donations/save') }}" class="block" id="sg-donation-add-form">
+    <div class="block-container">
+
+        <!-- User Selection -->
+        <xf:form-row label="{{ phrase('sg_donations_select_user') }}">
+            <xf:username name="user_id" value="{{ $prefilledUser ? $prefilledUser.username : '' }}" user-id="{{ $prefill.user_id }}" required="true" class="input" />
+        </xf:form-row>
+
+        <!-- User Preview Panel (AJAX) -->
+        <div id="sg-user-preview" class="block-container" style="{{ $prefilledUser ? '' : 'display:none;' }}">
+            <xf:if is="$prefilledUser">
+                {{ include_template('sg_donations_donation_user_preview', {user: $prefilledUser, memberships: [], queued: []}) }}
+            </xf:if>
+        </div>
+
+        <!-- Campaign Selection -->
+        <xf:form-row label="{{ phrase('sg_donations_select_campaign') }}">
+            <select name="campaign_id" id="sg-campaign-select" class="input" required>
+                <option value="">— {{ phrase('sg_donations_select_campaign') }} —</option>
+                <xf:foreach loop="$campaigns" value="$campaign">
+                    <option value="{{ $campaign.campaign_id }}" {{ $prefill.campaign_id == $campaign.campaign_id ? 'selected' : '' }}>
+                        {{ $campaign.title }} ({{ $campaign.currency_label }})
+                    </option>
+                </xf:foreach>
+            </select>
+        </xf:form-row>
+
+        <!-- Tier Selection (populated via AJAX or static render) -->
+        <xf:form-row label="{{ phrase('sg_donations_select_tier') }}">
+            <select name="tier_id" id="sg-tier-select" class="input" required>
+                <option value="">— {{ phrase('sg_donations_select_tier') }} —</option>
+                <xf:foreach loop="$campaigns" value="$campaign">
+                    <xf:foreach loop="$campaign.Tiers" value="$tier">
+                        <xf:if is="$tier.active">
+                            <option value="{{ $tier.tier_id }}"
+                                data-campaign="{{ $campaign.campaign_id }}"
+                                {{ $prefill.tier_id == $tier.tier_id ? 'selected' : '' }}
+                                style="{{ $prefill.campaign_id AND $prefill.campaign_id != $campaign.campaign_id ? 'display:none;' : '' }}">
+                                {{ $tier.title }} — {{ $campaign.currency_label }} {{ number_format($tier.amount, 2) }}
+                            </option>
+                        </xf:if>
+                    </xf:foreach>
+                </xf:foreach>
+            </select>
+        </xf:form-row>
+
+        <!-- Payment Reference (required for duplicate/new, blank is NOT allowed for duplicate) -->
+        <xf:form-row label="{{ phrase('sg_donations_payment_ref') }}" explain="Required. Must be unique per donation.">
+            <input type="text" name="payment_ref" value="" class="input" required />
+        </xf:form-row>
+
+        <!-- Queued Until -->
+        <xf:form-row label="{{ phrase('sg_donations_queued_until') }}" explain="Leave blank to make eligible immediately.">
+            <input type="datetime-local" name="queued_until" value="" class="input" />
+        </xf:form-row>
+
+        <xf:submit-row sticky="true" icon="save">{{ phrase('sg_donations_add_donation') }}</xf:submit-row>
+    </div>
+    <xf:token />
+</form>
+
+<script>
+    (function() {
+        var campaignSelect = document.getElementById('sg-campaign-select');
+        var tierSelect     = document.getElementById('sg-tier-select');
+        var tierOptions    = tierSelect.querySelectorAll('option[data-campaign]');
+        var userInput      = document.querySelector('[name="user_id"]');
+        var preview        = document.getElementById('sg-user-preview');
+
+        // Filter tiers by campaign
+        function filterTiers(campaignId) {
+            tierOptions.forEach(function(opt) {
+                opt.style.display = (!campaignId || opt.dataset.campaign == campaignId) ? '' : 'none';
+            });
+            // Reset selected if it doesn't belong to campaign
+            var selected = tierSelect.options[tierSelect.selectedIndex];
+            if (selected && selected.dataset.campaign && campaignId && selected.dataset.campaign != campaignId) {
+                tierSelect.value = '';
+            }
+        }
+
+        campaignSelect.addEventListener('change', function() {
+            filterTiers(this.value);
+        });
+
+        // Filter initially if prefill
+        filterTiers(campaignSelect.value);
+
+        // AJAX user preview
+        function loadUserPreview(userId) {
+            if (!userId) { preview.style.display = 'none'; return; }
+            XF.ajax('get', XF.buildUrl('sg-donations/donations/user-preview'), {user_id: userId}, function(data) {
+                if (data.html) {
+                    XF.setupHtmlInsert(data.html, function(html, container) {
+                        preview.innerHTML = '';
+                        preview.appendChild(html);
+                        preview.style.display = '';
+                    });
+                }
+            });
+        }
+
+        // Debounce user lookup on input blur
+        var userIdInput = document.querySelector('[name="user_id"]');
+        if (userIdInput) {
+            userIdInput.addEventListener('change', function() {
+                // Try to find user_id from the autocomplete hidden field if present
+                var hiddenUserId = document.querySelector('input[data-xf-init="username-autocomplete-user-id"]');
+                if (hiddenUserId) {
+                    loadUserPreview(hiddenUserId.value);
+                }
+            });
+        }
+    })();
+</script>

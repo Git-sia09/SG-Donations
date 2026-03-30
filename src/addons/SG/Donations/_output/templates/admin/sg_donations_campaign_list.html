@@ -1,0 +1,44 @@
+<xf:title>{{ phrase('sg_donations_campaigns') }}</xf:title>
+
+<xf:if is="$xf.visitor.hasAdminPermission('sgDonations_manageCampaigns')">
+    <xf:if is="$campaigns|count">
+        <div class="block">
+            <div class="block-container">
+                <table class="dataTable">
+                    <thead>
+                        <tr>
+                            <th>{{ phrase('sg_donations_campaign_title') }}</th>
+                            <th>{{ phrase('sg_donations_campaign_currency_label') }}</th>
+                            <th>{{ phrase('sg_donations_campaign_goal_amount') }}</th>
+                            <th>{{ phrase('sg_donations_campaign_active') }}</th>
+                            <th class="dataTable-cell--control">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xf:foreach loop="$campaigns" value="$campaign">
+                            <tr>
+                                <td><a href="{{ link('sg-donations/campaigns/edit', $campaign) }}">{{ $campaign.title }}</a></td>
+                                <td>{{ $campaign.currency_label }}</td>
+                                <td>{{ number_format($campaign.goal_amount, 2) }}</td>
+                                <td>
+                                    <xf:toggle link="sg-donations/campaigns/toggle" item="$campaign" />
+                                </td>
+                                <td class="dataTable-cell--control">
+                                    <a class="button button--small" href="{{ link('sg-donations/campaigns/tiers', $campaign) }}">{{ phrase('sg_donations_tiers') }}</a>
+                                    <a class="button button--small button--link" href="{{ link('sg-donations/campaigns/edit', $campaign) }}">{{ phrase('edit') }}</a>
+                                    <a class="button button--small button--danger" href="{{ link('sg-donations/campaigns/delete', $campaign) }}">{{ phrase('delete') }}</a>
+                                </td>
+                            </tr>
+                        </xf:foreach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <xf:else />
+        <div class="blockMessage">{{ phrase('no_results_found') }}</div>
+    </xf:if>
+
+    <p class="formSubmitRow">
+        <a class="button button--primary" href="{{ link('sg-donations/campaigns/add') }}">{{ phrase('sg_donations_add_campaign') }}</a>
+    </p>
+</xf:if>

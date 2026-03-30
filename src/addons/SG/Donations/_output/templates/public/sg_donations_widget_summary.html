@@ -1,0 +1,148 @@
+<div class="sg-donations-widget" data-ticker-speed="{{ $settings.ticker_speed }}">
+
+    <xf:if is="$campaignData|count">
+        <!-- Campaign Tabs -->
+        <div class="sg-donations-tabs">
+            <xf:foreach loop="$campaignData" key="$idx" value="$data">
+                <button class="sg-donations-tab {{ $idx == 0 ? 'is-active' : '' }}"
+                        data-tab-target="sg-campaign-{{ $data.campaign.campaign_id }}">
+                    {{ $data.campaign.title }}
+                </button>
+            </xf:foreach>
+        </div>
+
+        <xf:foreach loop="$campaignData" key="$idx" value="$data">
+            <div class="sg-donations-campaign {{ $idx == 0 ? 'is-active' : '' }}"
+                 id="sg-campaign-{{ $data.campaign.campaign_id }}">
+
+                <!-- Progress bar -->
+                <xf:if is="$settings.show_progress_bar AND $data.campaign.goal_amount > 0">
+                    <div class="sg-donations-progress">
+                        <div class="sg-donations-progress-bar"
+                             style="width: {{ min(100, ($data.stats ? $data.stats.raised_total : 0) / $data.campaign.goal_amount * 100) }}%;">
+                        </div>
+                    </div>
+                </xf:if>
+
+                <!-- Raised & goal -->
+                <div class="sg-donations-totals">
+                    <xf:if is="$settings.show_goal AND $data.campaign.goal_amount > 0">
+                        <span class="sg-donations-raised">
+                            {{ phrase('sg_donations_raised') }}:
+                            <strong>{{ $data.campaign.currency_label }} {{ number_format($data.stats ? $data.stats.raised_total : 0, 2) }}</strong>
+                        </span>
+                        <span class="sg-donations-separator"> / </span>
+                        <span class="sg-donations-goal">
+                            {{ phrase('sg_donations_goal') }}:
+                            <strong>{{ $data.campaign.currency_label }} {{ number_format($data.campaign.goal_amount, 2) }}</strong>
+                        </span>
+                    <xf:else />
+                        <span class="sg-donations-raised">
+                            {{ phrase('sg_donations_raised') }}:
+                            <strong>{{ $data.campaign.currency_label }} {{ number_format($data.stats ? $data.stats.raised_total : 0, 2) }}</strong>
+                        </span>
+                    </xf:if>
+                </div>
+
+                <!-- Countdown -->
+                <xf:if is="$data.campaign.end_date > 0">
+                    <div class="sg-donations-countdown"
+                         data-end="{{ $data.campaign.end_date }}">
+                        <xf:if is="$data.campaign.isEnded()">
+                            <span>{{ phrase('sg_donations_campaign_ended') }}</span>
+                        <xf:else />
+                            <span>{{ phrase('sg_donations_campaign_ends_in') }}: <span class="sg-countdown-timer"></span></span>
+                        </xf:if>
+                    </div>
+                </xf:if>
+
+                <!-- Ticker -->
+                <xf:if is="$settings.show_ticker AND $data.donors|count">
+                    <div class="sg-donations-ticker-wrap">
+                        <div class="sg-donations-ticker" aria-live="polite">
+                            <xf:foreach loop="$data.donors" key="$di" value="$donor">
+                                <span class="sg-donations-ticker-item">
+                                    <a href="{{ link('members', null, {name: $donor.username}) }}" class="sg-donations-donor-link">{{ $donor.username }}</a>
+                                    <xf:if is="$di < ($data.donors|count - 1)">
+                                        <span class="sg-donations-dot" aria-hidden="true">&bull;</span>
+                                    </xf:if>
+                                </span>
+                            </xf:foreach>
+                        </div>
+                    </div>
+                <xf:elseif is="$settings.show_ticker" />
+                    <div class="sg-donations-ticker-wrap">
+                        <div class="sg-donations-ticker-empty">{{ phrase('sg_donations_no_donations_yet') }}</div>
+                    </div>
+                </xf:if>
+            </div>
+        </xf:foreach>
+    </xf:if>
+</div>
+
+<style>
+.sg-donations-widget { font-size: .9em; }
+.sg-donations-tabs { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+.sg-donations-tab { padding: 4px 10px; border: 1px solid #ccc; background: #f8f8f8; cursor: pointer; border-radius: 3px; }
+.sg-donations-tab.is-active { background: #4a90d9; color: #fff; border-color: #4a90d9; }
+.sg-donations-campaign { display: none; }
+.sg-donations-campaign.is-active { display: block; }
+.sg-donations-progress { background: #e9e9e9; border-radius: 4px; height: 8px; margin: 6px 0; overflow: hidden; }
+.sg-donations-progress-bar { background: #4a90d9; height: 100%; transition: width .4s; }
+.sg-donations-totals { margin: 4px 0 6px; }
+.sg-donations-countdown { font-size: .85em; color: #888; margin-bottom: 4px; }
+.sg-donations-ticker-wrap { overflow: hidden; position: relative; height: 22px; }
+.sg-donations-ticker { display: flex; gap: 6px; white-space: nowrap; animation: sg-ticker-scroll linear infinite; }
+.sg-donations-ticker:hover { animation-play-state: paused; }
+.sg-donations-ticker-item { display: inline-flex; align-items: center; gap: 4px; }
+.sg-donations-dot { color: #aaa; }
+.sg-donations-donor-link { color: inherit; text-decoration: none; }
+.sg-donations-donor-link:hover { text-decoration: underline; }
+@keyframes sg-ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+</style>
+
+<script>
+(function() {
+    // Tab switching
+    document.querySelectorAll('.sg-donations-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var target = this.dataset.tabTarget;
+            var widget = this.closest('.sg-donations-widget');
+            widget.querySelectorAll('.sg-donations-tab').forEach(function(t) { t.classList.remove('is-active'); });
+            widget.querySelectorAll('.sg-donations-campaign').forEach(function(c) { c.classList.remove('is-active'); });
+            this.classList.add('is-active');
+            var targetEl = document.getElementById(target);
+            if (targetEl) targetEl.classList.add('is-active');
+        });
+    });
+
+    // Ticker speed
+    var widget = document.querySelector('.sg-donations-widget');
+    if (widget) {
+        var speed = parseInt(widget.dataset.tickerSpeed || 30, 10);
+        document.querySelectorAll('.sg-donations-ticker').forEach(function(ticker) {
+            ticker.style.animationDuration = speed + 's';
+        });
+    }
+
+    // Countdown timers
+    document.querySelectorAll('.sg-donations-countdown[data-end]').forEach(function(el) {
+        var endTs = parseInt(el.dataset.end, 10) * 1000;
+        var timerEl = el.querySelector('.sg-countdown-timer');
+        if (!timerEl) return;
+        function update() {
+            var diff = Math.max(0, endTs - Date.now());
+            var d = Math.floor(diff / 86400000);
+            var h = Math.floor((diff % 86400000) / 3600000);
+            var m = Math.floor((diff % 3600000) / 60000);
+            var s = Math.floor((diff % 60000) / 1000);
+            timerEl.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's';
+        }
+        update();
+        setInterval(update, 1000);
+    });
+})();
+</script>

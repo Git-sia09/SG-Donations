@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<admin_navigation>
+    <nav id="sgDonations" addon_id="SG/Donations" display_order="101" parent_id="home" icon="fa-heart">
+        <title>SG Donations</title>
+        <link>sg-donations</link>
+        <admin_permission_id>sgDonations_viewDonations</admin_permission_id>
+    </nav>
+
+    <nav id="sgDonationsDonations" addon_id="SG/Donations" display_order="10" parent_id="sgDonations">
+        <title>Donations</title>
+        <link>sg-donations/donations</link>
+        <admin_permission_id>sgDonations_viewDonations</admin_permission_id>
+    </nav>
+
+    <nav id="sgDonationsCampaigns" addon_id="SG/Donations" display_order="20" parent_id="sgDonations">
+        <title>Campaigns</title>
+        <link>sg-donations/campaigns</link>
+        <admin_permission_id>sgDonations_manageCampaigns</admin_permission_id>
+    </nav>
+
+    <nav id="sgDonationsStats" addon_id="SG/Donations" display_order="30" parent_id="sgDonations">
+        <title>Stats &amp; Rebuild</title>
+        <link>sg-donations/stats</link>
+        <admin_permission_id>sgDonations_rebuildStats</admin_permission_id>
+    </nav>
+
+    <nav id="sgDonationsWidgetSettings" addon_id="SG/Donations" display_order="40" parent_id="sgDonations">
+        <title>Widget Settings</title>
+        <link>sg-donations/stats/widget-settings</link>
+        <admin_permission_id>sgDonations_manageWidget</admin_permission_id>
+    </nav>
+</admin_navigation>

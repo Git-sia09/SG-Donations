@@ -1,0 +1,36 @@
+<xf:title>{{ phrase('sg_donations_stats_and_rebuild') }}</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <xf:if is="$stats|count">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th>{{ phrase('sg_donations_campaign_title') }}</th>
+                        <th>{{ phrase('sg_donations_raised_total') }}</th>
+                        <th>{{ phrase('sg_donations_last_rebuilt_at') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xf:foreach loop="$stats" value="$stat">
+                        <tr>
+                            <td>{{ $stat.Campaign ? $stat.Campaign.title : $stat.campaign_id }}</td>
+                            <td>{{ number_format($stat.raised_total, 2) }}</td>
+                            <td>{{ $stat.last_rebuild_at ? $xf.language.dateTime($stat.last_rebuild_at) : phrase('sg_donations_never_rebuilt') }}</td>
+                        </tr>
+                    </xf:foreach>
+                </tbody>
+            </table>
+        <xf:else />
+            <div class="blockMessage">{{ phrase('no_results_found') }}</div>
+        </xf:if>
+    </div>
+</div>
+
+<div class="block-container">
+    <p>{{ phrase('sg_donations_rebuild_stats_confirm') }}</p>
+    <form method="post" action="{{ link('sg-donations/stats/rebuild') }}">
+        <xf:submit-row icon="save">{{ phrase('sg_donations_rebuild_stats') }}</xf:submit-row>
+        <xf:token />
+    </form>
+</div>

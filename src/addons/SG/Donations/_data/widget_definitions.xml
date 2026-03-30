@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget_definitions>
+    <widget_definition definition_id="sg_donations_summary" addon_id="SG/Donations">
+        <title>SG Donations Summary</title>
+        <widget_class>SG\Donations\Widget\DonationsSummary</widget_class>
+    </widget_definition>
+</widget_definitions>

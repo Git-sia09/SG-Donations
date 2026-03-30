@@ -1,0 +1,10 @@
+<xf:title>{{ phrase('sg_donations_delete_campaign') }}</xf:title>
+
+<div class="blockMessage blockMessage--iconic blockMessage--error">
+    <p>{{ phrase('confirm_delete_item', {item: $campaign.title}) }}</p>
+</div>
+
+<form method="post" action="{{ link('sg-donations/campaigns/delete', $campaign) }}" class="block">
+    <xf:submit-row sticky="true" icon="delete" cancel="{{ link('sg-donations/campaigns') }}">{{ phrase('delete') }}</xf:submit-row>
+    <xf:token />
+</form>
