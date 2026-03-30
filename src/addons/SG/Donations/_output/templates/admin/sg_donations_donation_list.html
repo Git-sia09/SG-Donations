@@ -1,0 +1,94 @@
+<xf:title>{{ phrase('sg_donations_donations') }}</xf:title>
+
+<!-- Filters -->
+<form method="get" action="{{ link('sg-donations/donations') }}" class="block">
+    <div class="block-container">
+        <div class="formRow formRow--inline">
+            <label class="formRow-label">{{ phrase('sg_donations_filter_by_campaign') }}</label>
+            <select name="campaign_id" class="input">
+                <option value="">{{ phrase('sg_donations_all_campaigns') }}</option>
+                <xf:foreach loop="$campaigns" value="$campaign">
+                    <option value="{{ $campaign.campaign_id }}" {{ $filters.campaign_id == $campaign.campaign_id ? 'selected' : '' }}>{{ $campaign.title }}</option>
+                </xf:foreach>
+            </select>
+
+            <label class="formRow-label">{{ phrase('sg_donations_filter_by_status') }}</label>
+            <select name="status" class="input">
+                <option value="">{{ phrase('sg_donations_all_statuses') }}</option>
+                <option value="queued" {{ $filters.status == 'queued' ? 'selected' : '' }}>{{ phrase('sg_donations_status_queued') }}</option>
+                <option value="applied" {{ $filters.status == 'applied' ? 'selected' : '' }}>{{ phrase('sg_donations_status_applied') }}</option>
+                <option value="voided" {{ $filters.status == 'voided' ? 'selected' : '' }}>{{ phrase('sg_donations_status_voided') }}</option>
+            </select>
+
+            <button type="submit" class="button">{{ phrase('filter') }}</button>
+        </div>
+    </div>
+</form>
+
+<!-- Export buttons -->
+<xf:if is="$xf.visitor.hasAdminPermission('sgDonations_exportCsv')">
+    <div class="block-container" style="margin-bottom:8px;">
+        <a class="button button--small" href="{{ link('sg-donations/donations/export-csv', null, $filters) }}">{{ phrase('sg_donations_export_csv_filtered') }}</a>
+        <a class="button button--small" href="{{ link('sg-donations/donations/export-csv-all') }}">{{ phrase('sg_donations_export_csv_all') }}</a>
+    </div>
+</xf:if>
+
+<!-- Donations table -->
+<xf:if is="$donations|count">
+    <div class="block">
+        <div class="block-container">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{ phrase('user') }}</th>
+                        <th>{{ phrase('sg_donations_campaign_title') }}</th>
+                        <th>{{ phrase('sg_donations_tier_title') }}</th>
+                        <th>{{ phrase('sg_donations_tier_amount') }}</th>
+                        <th>{{ phrase('sg_donations_payment_ref') }}</th>
+                        <th>{{ phrase('status') }}</th>
+                        <th>{{ phrase('date') }}</th>
+                        <th class="dataTable-cell--control">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xf:foreach loop="$donations" value="$donation">
+                        <tr class="{{ $donation.status == 'voided' ? 'dataTable--strikethrough' : '' }}">
+                            <td>{{ $donation.donation_id }}</td>
+                            <td>{{ $donation.User ? $donation.User.username : $donation.user_id }}</td>
+                            <td>{{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}</td>
+                            <td>{{ $donation.Tier ? $donation.Tier.title : $donation.tier_id }}</td>
+                            <td>{{ number_format($donation.amount, 2) }}</td>
+                            <td>{{ $donation.payment_ref }}</td>
+                            <td>
+                                <span class="badge badge--{{ $donation.status == 'applied' ? 'success' : ($donation.status == 'voided' ? 'danger' : 'info') }}">
+                                    {{ phrase('sg_donations_status_' ~ $donation.status) }}
+                                </span>
+                            </td>
+                            <td>{{ $xf.language.date($donation.created_at) }}</td>
+                            <td class="dataTable-cell--control">
+                                <a class="button button--small" href="{{ link('sg-donations/donations/view', $donation) }}">{{ phrase('view') }}</a>
+                                <xf:if is="!$donation.isVoided() AND $xf.visitor.hasAdminPermission('sgDonations_voidDonation')">
+                                    <a class="button button--small button--danger" href="{{ link('sg-donations/donations/void', $donation) }}">{{ phrase('sg_donations_void_donation') }}</a>
+                                </xf:if>
+                                <xf:if is="$xf.visitor.hasAdminPermission('sgDonations_addDonation')">
+                                    <a class="button button--small" href="{{ link('sg-donations/donations/duplicate', $donation) }}">{{ phrase('sg_donations_duplicate_donation') }}</a>
+                                </xf:if>
+                            </td>
+                        </tr>
+                    </xf:foreach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <xf:page-nav page="$page" per-page="$perPage" total="$total" />
+<xf:else />
+    <div class="blockMessage">{{ phrase('no_results_found') }}</div>
+</xf:if>
+
+<xf:if is="$xf.visitor.hasAdminPermission('sgDonations_addDonation')">
+    <p class="formSubmitRow">
+        <a class="button button--primary" href="{{ link('sg-donations/donations/add') }}">{{ phrase('sg_donations_add_donation') }}</a>
+    </p>
+</xf:if>

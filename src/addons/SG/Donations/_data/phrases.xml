@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+    <!-- General -->
+    <phrase title="sg_donations_title" addon_id="SG/Donations">SG Donations</phrase>
+    <phrase title="sg_donations_campaign_not_found" addon_id="SG/Donations">Campaign not found.</phrase>
+    <phrase title="sg_donations_tier_not_found" addon_id="SG/Donations">Tier not found.</phrase>
+    <phrase title="sg_donations_donation_not_found" addon_id="SG/Donations">Donation not found.</phrase>
+    <phrase title="sg_donations_invalid_user" addon_id="SG/Donations">Invalid user selected.</phrase>
+    <phrase title="sg_donations_invalid_tier" addon_id="SG/Donations">Invalid tier selected.</phrase>
+    <phrase title="sg_donations_tier_campaign_mismatch" addon_id="SG/Donations">The selected tier does not belong to the selected campaign.</phrase>
+    <phrase title="sg_donations_amount_must_be_positive" addon_id="SG/Donations">Amount must be greater than zero.</phrase>
+    <phrase title="sg_donations_goal_amount_invalid" addon_id="SG/Donations">Goal amount must be zero or greater.</phrase>
+    <phrase title="sg_donations_restricted_group_not_allowed" addon_id="SG/Donations">The Registered or Administrator group may not be assigned by a tier.</phrase>
+    <phrase title="sg_donations_cannot_delete_tier_with_logs" addon_id="SG/Donations">This tier cannot be deleted because it has existing donation records. Disable the tier instead.</phrase>
+
+    <!-- Validation -->
+    <phrase title="sg_donations_campaign_title_required" addon_id="SG/Donations">Please enter a campaign title.</phrase>
+    <phrase title="sg_donations_tier_title_required" addon_id="SG/Donations">Please enter a tier title.</phrase>
+    <phrase title="sg_donations_currency_label_required" addon_id="SG/Donations">Please enter a currency label (e.g. USD).</phrase>
+    <phrase title="sg_donations_void_reason_required" addon_id="SG/Donations">Please enter a reason for voiding this donation.</phrase>
+    <phrase title="sg_donations_already_voided" addon_id="SG/Donations">This donation has already been voided.</phrase>
+
+    <!-- Campaigns -->
+    <phrase title="sg_donations_campaigns" addon_id="SG/Donations">Campaigns</phrase>
+    <phrase title="sg_donations_add_campaign" addon_id="SG/Donations">Add Campaign</phrase>
+    <phrase title="sg_donations_edit_campaign" addon_id="SG/Donations">Edit Campaign</phrase>
+    <phrase title="sg_donations_delete_campaign" addon_id="SG/Donations">Delete Campaign</phrase>
+    <phrase title="sg_donations_campaign_saved" addon_id="SG/Donations">Campaign saved successfully.</phrase>
+    <phrase title="sg_donations_campaign_title" addon_id="SG/Donations">Title</phrase>
+    <phrase title="sg_donations_campaign_description" addon_id="SG/Donations">Description</phrase>
+    <phrase title="sg_donations_campaign_currency_label" addon_id="SG/Donations">Currency Label</phrase>
+    <phrase title="sg_donations_campaign_goal_amount" addon_id="SG/Donations">Goal Amount</phrase>
+    <phrase title="sg_donations_campaign_start_date" addon_id="SG/Donations">Start Date (UTC)</phrase>
+    <phrase title="sg_donations_campaign_end_date" addon_id="SG/Donations">End Date (UTC)</phrase>
+    <phrase title="sg_donations_campaign_active" addon_id="SG/Donations">Active</phrase>
+    <phrase title="sg_donations_campaign_display_order" addon_id="SG/Donations">Display Order</phrase>
+
+    <!-- Tiers -->
+    <phrase title="sg_donations_tiers" addon_id="SG/Donations">Tiers</phrase>
+    <phrase title="sg_donations_add_tier" addon_id="SG/Donations">Add Tier</phrase>
+    <phrase title="sg_donations_edit_tier" addon_id="SG/Donations">Edit Tier</phrase>
+    <phrase title="sg_donations_delete_tier" addon_id="SG/Donations">Delete Tier</phrase>
+    <phrase title="sg_donations_tier_saved" addon_id="SG/Donations">Tier saved successfully.</phrase>
+    <phrase title="sg_donations_tier_title" addon_id="SG/Donations">Tier Name</phrase>
+    <phrase title="sg_donations_tier_description" addon_id="SG/Donations">Description</phrase>
+    <phrase title="sg_donations_tier_amount" addon_id="SG/Donations">Amount</phrase>
+    <phrase title="sg_donations_tier_duration_months" addon_id="SG/Donations">Duration (months)</phrase>
+    <phrase title="sg_donations_tier_user_groups" addon_id="SG/Donations">User Groups to Grant</phrase>
+    <phrase title="sg_donations_tier_display_order" addon_id="SG/Donations">Display Order</phrase>
+    <phrase title="sg_donations_tier_active" addon_id="SG/Donations">Active</phrase>
+
+    <!-- Donations -->
+    <phrase title="sg_donations_donations" addon_id="SG/Donations">Donations</phrase>
+    <phrase title="sg_donations_add_donation" addon_id="SG/Donations">Add Donation</phrase>
+    <phrase title="sg_donations_view_donation" addon_id="SG/Donations">View Donation</phrase>
+    <phrase title="sg_donations_void_donation" addon_id="SG/Donations">Void Donation</phrase>
+    <phrase title="sg_donations_duplicate_donation" addon_id="SG/Donations">Duplicate</phrase>
+    <phrase title="sg_donations_void_confirm" addon_id="SG/Donations">Are you sure you want to void this donation? This action cannot be undone.</phrase>
+    <phrase title="sg_donations_void_reason" addon_id="SG/Donations">Void Reason</phrase>
+    <phrase title="sg_donations_voided_successfully" addon_id="SG/Donations">Donation voided successfully.</phrase>
+    <phrase title="sg_donations_donation_added_successfully" addon_id="SG/Donations">Donation added successfully.</phrase>
+    <phrase title="sg_donations_select_user" addon_id="SG/Donations">Select User</phrase>
+    <phrase title="sg_donations_select_campaign" addon_id="SG/Donations">Select Campaign</phrase>
+    <phrase title="sg_donations_select_tier" addon_id="SG/Donations">Select Tier</phrase>
+    <phrase title="sg_donations_payment_ref" addon_id="SG/Donations">Payment Reference</phrase>
+    <phrase title="sg_donations_queued_until" addon_id="SG/Donations">Queued Until (UTC)</phrase>
+    <phrase title="sg_donations_status_queued" addon_id="SG/Donations">Queued</phrase>
+    <phrase title="sg_donations_status_applied" addon_id="SG/Donations">Applied</phrase>
+    <phrase title="sg_donations_status_voided" addon_id="SG/Donations">Voided</phrase>
+    <phrase title="sg_donations_filter_by_campaign" addon_id="SG/Donations">Filter by Campaign</phrase>
+    <phrase title="sg_donations_filter_by_status" addon_id="SG/Donations">Filter by Status</phrase>
+    <phrase title="sg_donations_all_campaigns" addon_id="SG/Donations">All Campaigns</phrase>
+    <phrase title="sg_donations_all_statuses" addon_id="SG/Donations">All Statuses</phrase>
+    <phrase title="sg_donations_export_csv_filtered" addon_id="SG/Donations">Export Filtered (CSV)</phrase>
+    <phrase title="sg_donations_export_csv_all" addon_id="SG/Donations">Export All (CSV)</phrase>
+    <phrase title="sg_donations_user_preview" addon_id="SG/Donations">User Preview</phrase>
+    <phrase title="sg_donations_active_memberships" addon_id="SG/Donations">Active Memberships</phrase>
+    <phrase title="sg_donations_queued_donations" addon_id="SG/Donations">Queued Donations</phrase>
+    <phrase title="sg_donations_no_active_memberships" addon_id="SG/Donations">No active memberships for this user.</phrase>
+    <phrase title="sg_donations_no_queued_donations" addon_id="SG/Donations">No queued donations for this user.</phrase>
+
+    <!-- Stats / rebuild -->
+    <phrase title="sg_donations_stats_and_rebuild" addon_id="SG/Donations">Stats &amp; Rebuild</phrase>
+    <phrase title="sg_donations_rebuild_stats" addon_id="SG/Donations">Rebuild Statistics</phrase>
+    <phrase title="sg_donations_rebuild_stats_confirm" addon_id="SG/Donations">This will recompute raised totals and latest donors for all campaigns.</phrase>
+    <phrase title="sg_donations_stats_rebuilt_x_campaigns" addon_id="SG/Donations">Statistics rebuilt for {count} campaign(s).</phrase>
+    <phrase title="sg_donations_last_rebuilt_at" addon_id="SG/Donations">Last Rebuilt</phrase>
+    <phrase title="sg_donations_never_rebuilt" addon_id="SG/Donations">Never</phrase>
+    <phrase title="sg_donations_raised_total" addon_id="SG/Donations">Raised Total</phrase>
+
+    <!-- Widget settings -->
+    <phrase title="sg_donations_widget_settings" addon_id="SG/Donations">Widget Settings</phrase>
+    <phrase title="sg_donations_widget_settings_saved" addon_id="SG/Donations">Widget settings saved.</phrase>
+    <phrase title="sg_donations_widget_campaigns" addon_id="SG/Donations">Campaigns to Display</phrase>
+    <phrase title="sg_donations_widget_show_ticker" addon_id="SG/Donations">Show Donor Ticker</phrase>
+    <phrase title="sg_donations_widget_show_progress_bar" addon_id="SG/Donations">Show Progress Bar</phrase>
+    <phrase title="sg_donations_widget_show_goal" addon_id="SG/Donations">Show Goal Amount</phrase>
+    <phrase title="sg_donations_widget_hide_ended" addon_id="SG/Donations">Hide Ended Campaign Tabs</phrase>
+    <phrase title="sg_donations_widget_ticker_speed" addon_id="SG/Donations">Ticker Speed (seconds per cycle)</phrase>
+    <phrase title="sg_donations_widget_all_campaigns" addon_id="SG/Donations">All Active Campaigns</phrase>
+
+    <!-- Alerts -->
+    <phrase title="sg_donations_alert_donation_added" addon_id="SG/Donations">Your donation of {amount} to {campaign_title} has been received. Thank you!</phrase>
+    <phrase title="sg_donations_alert_donation_voided" addon_id="SG/Donations">Your donation to {campaign_title} has been voided by an administrator.</phrase>
+    <phrase title="sg_donations_alert_donation_applied" addon_id="SG/Donations">Your donation of {amount} to {campaign_title} has been applied. Your benefits are active until {benefits_until}.</phrase>
+
+    <!-- Job -->
+    <phrase title="sg_donations_applying_queued_donations" addon_id="SG/Donations">Applying queued donations...</phrase>
+
+    <!-- Widget -->
+    <phrase title="sg_donations_latest_donors" addon_id="SG/Donations">Latest Donors</phrase>
+    <phrase title="sg_donations_no_donations_yet" addon_id="SG/Donations">No donations yet. Be the first!</phrase>
+    <phrase title="sg_donations_goal" addon_id="SG/Donations">Goal</phrase>
+    <phrase title="sg_donations_raised" addon_id="SG/Donations">Raised</phrase>
+    <phrase title="sg_donations_campaign_ended" addon_id="SG/Donations">Campaign ended</phrase>
+    <phrase title="sg_donations_campaign_ends_in" addon_id="SG/Donations">Campaign ends in</phrase>
+</phrases>

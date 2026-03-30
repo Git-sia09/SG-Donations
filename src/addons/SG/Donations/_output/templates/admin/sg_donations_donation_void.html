@@ -1,0 +1,24 @@
+<xf:title>{{ phrase('sg_donations_void_donation') }} #{{ $donation.donation_id }}</xf:title>
+
+<div class="blockMessage blockMessage--iconic blockMessage--error">
+    <p>{{ phrase('sg_donations_void_confirm') }}</p>
+    <p>
+        <strong>{{ phrase('user') }}:</strong> {{ $donation.User ? $donation.User.username : $donation.user_id }}<br />
+        <strong>{{ phrase('sg_donations_campaign_title') }}:</strong> {{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}<br />
+        <strong>{{ phrase('sg_donations_tier_amount') }}:</strong> {{ number_format($donation.amount, 2) }}<br />
+        <strong>{{ phrase('status') }}:</strong> {{ phrase('sg_donations_status_' ~ $donation.status) }}
+    </p>
+</div>
+
+<form method="post" action="{{ link('sg-donations/donations/void', $donation) }}" class="block">
+    <div class="block-container">
+        <xf:form-row label="{{ phrase('sg_donations_void_reason') }}" required="true">
+            <textarea name="void_reason" class="input" rows="3" required placeholder="{{ phrase('sg_donations_void_reason_required') }}"></textarea>
+        </xf:form-row>
+
+        <xf:submit-row sticky="true" icon="delete" cancel="{{ link('sg-donations/donations/view', $donation) }}">
+            {{ phrase('sg_donations_void_donation') }}
+        </xf:submit-row>
+    </div>
+    <xf:token />
+</form>

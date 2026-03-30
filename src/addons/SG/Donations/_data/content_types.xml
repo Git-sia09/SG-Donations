@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content_types>
+    <content_type content_type="sg_donation" addon_id="SG/Donations">
+        <alert_handler_class>SG\Donations\Alert\Donation</alert_handler_class>
+    </content_type>
+</content_types>

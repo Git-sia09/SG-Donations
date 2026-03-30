@@ -1,0 +1,42 @@
+<xf:title>{{ phrase('sg_donations_tiers') }} — {{ $campaign.title }}</xf:title>
+
+<xf:if is="$tiers|count">
+    <div class="block">
+        <div class="block-container">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th>{{ phrase('sg_donations_tier_title') }}</th>
+                        <th>{{ phrase('sg_donations_tier_amount') }}</th>
+                        <th>{{ phrase('sg_donations_tier_duration_months') }}</th>
+                        <th>{{ phrase('sg_donations_tier_active') }}</th>
+                        <th class="dataTable-cell--control">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xf:foreach loop="$tiers" value="$tier">
+                        <tr>
+                            <td>{{ $tier.title }}</td>
+                            <td>{{ $campaign.currency_label }} {{ number_format($tier.amount, 2) }}</td>
+                            <td>{{ $tier.duration_months }}</td>
+                            <td>
+                                <xf:toggle link="sg-donations/campaigns/tiers/toggle" item="$tier" />
+                            </td>
+                            <td class="dataTable-cell--control">
+                                <a class="button button--small button--link" href="{{ link('sg-donations/campaigns/tiers/edit', $tier) }}">{{ phrase('edit') }}</a>
+                                <a class="button button--small button--danger" href="{{ link('sg-donations/campaigns/tiers/delete', $tier) }}">{{ phrase('delete') }}</a>
+                            </td>
+                        </tr>
+                    </xf:foreach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<xf:else />
+    <div class="blockMessage">{{ phrase('no_results_found') }}</div>
+</xf:if>
+
+<p class="formSubmitRow">
+    <a class="button button--primary" href="{{ link('sg-donations/campaigns/tiers/add', $campaign) }}">{{ phrase('sg_donations_add_tier') }}</a>
+    <a class="button" href="{{ link('sg-donations/campaigns') }}">{{ phrase('back') }}</a>
+</p>

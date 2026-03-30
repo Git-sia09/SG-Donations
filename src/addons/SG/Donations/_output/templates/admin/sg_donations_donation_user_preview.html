@@ -1,0 +1,63 @@
+<div class="block-container">
+    <h3>{{ phrase('sg_donations_user_preview') }}: <a href="{{ link('members', $user) }}">{{ $user.username }}</a></h3>
+
+    <h4>{{ phrase('sg_donations_active_memberships') }}</h4>
+    <xf:if is="$memberships|count">
+        <table class="dataTable">
+            <thead>
+                <tr>
+                    <th>{{ phrase('sg_donations_campaign_title') }}</th>
+                    <th>{{ phrase('sg_donations_tier_title') }}</th>
+                    <th>{{ phrase('start_date') }}</th>
+                    <th>{{ phrase('end_date') }}</th>
+                    <th>{{ phrase('status') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <xf:foreach loop="$memberships" value="$membership">
+                    <tr>
+                        <td>{{ $membership.Campaign ? $membership.Campaign.title : $membership.campaign_id }}</td>
+                        <td>{{ $membership.Tier ? $membership.Tier.title : $membership.tier_id }}</td>
+                        <td>{{ $xf.language.date($membership.start_date) }}</td>
+                        <td>{{ $xf.language.date($membership.end_date) }}</td>
+                        <td>
+                            <xf:if is="$membership.isActive()">
+                                <span class="badge badge--success">{{ phrase('active') }}</span>
+                            <xf:else />
+                                <span class="badge badge--muted">{{ phrase('expired') }}</span>
+                            </xf:if>
+                        </td>
+                    </tr>
+                </xf:foreach>
+            </tbody>
+        </table>
+    <xf:else />
+        <p class="blockMessage--muted">{{ phrase('sg_donations_no_active_memberships') }}</p>
+    </xf:if>
+
+    <h4>{{ phrase('sg_donations_queued_donations') }}</h4>
+    <xf:if is="$queued|count">
+        <table class="dataTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ phrase('sg_donations_campaign_title') }}</th>
+                    <th>{{ phrase('sg_donations_tier_amount') }}</th>
+                    <th>{{ phrase('sg_donations_queued_until') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <xf:foreach loop="$queued" value="$donation">
+                    <tr>
+                        <td>{{ $donation.donation_id }}</td>
+                        <td>{{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}</td>
+                        <td>{{ number_format($donation.amount, 2) }}</td>
+                        <td>{{ $donation.queued_until ? $xf.language.date($donation.queued_until) : '—' }}</td>
+                    </tr>
+                </xf:foreach>
+            </tbody>
+        </table>
+    <xf:else />
+        <p class="blockMessage--muted">{{ phrase('sg_donations_no_queued_donations') }}</p>
+    </xf:if>
+</div>

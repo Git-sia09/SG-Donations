@@ -1,0 +1,39 @@
+<xf:title>{{ phrase('sg_donations_widget_settings') }}</xf:title>
+
+<form method="post" action="{{ link('sg-donations/stats/widget-settings-save') }}" class="block">
+    <div class="block-container">
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_campaigns') }}" explain="{{ phrase('sg_donations_widget_all_campaigns') }}">
+            <xf:foreach loop="$campaigns" value="$campaign">
+                <label class="formRow-choice">
+                    <input type="checkbox" name="campaign_ids[]" value="{{ $campaign.campaign_id }}"
+                        {{ ($settings.campaign_ids is not empty AND $campaign.campaign_id in $settings.campaign_ids) ? 'checked' : '' }} />
+                    {{ $campaign.title }}
+                </label>
+            </xf:foreach>
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_show_ticker') }}">
+            <xf:checkbox name="show_ticker" value="1" checked="{{ $settings.show_ticker }}" />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_show_progress_bar') }}">
+            <xf:checkbox name="show_progress_bar" value="1" checked="{{ $settings.show_progress_bar }}" />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_show_goal') }}">
+            <xf:checkbox name="show_goal" value="1" checked="{{ $settings.show_goal }}" />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_hide_ended') }}">
+            <xf:checkbox name="hide_ended_campaign_tabs" value="1" checked="{{ $settings.hide_ended_campaign_tabs }}" />
+        </xf:form-row>
+
+        <xf:form-row label="{{ phrase('sg_donations_widget_ticker_speed') }}">
+            <input type="number" name="ticker_speed" value="{{ $settings.ticker_speed }}" class="input" min="5" max="120" />
+        </xf:form-row>
+
+        <xf:submit-row sticky="true" icon="save">{{ phrase('save') }}</xf:submit-row>
+    </div>
+    <xf:token />
+</form>

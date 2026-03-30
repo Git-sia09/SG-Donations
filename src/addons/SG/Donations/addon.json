@@ -1,0 +1,16 @@
+{
+    "legacy_addon_id": "",
+    "title": "SG Donations",
+    "description": "Donation management add-on with campaigns, tiers, membership grants, widget, and AdminCP tools.",
+    "version_id": 1000070,
+    "version_string": "1.0.0 Beta 7",
+    "dev": "Git-sia09",
+    "dev_url": "",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": [],
+    "require": {
+        "XF": [2020000, "XenForo 2.2.0+"]
+    },
+    "icon": ""
+}

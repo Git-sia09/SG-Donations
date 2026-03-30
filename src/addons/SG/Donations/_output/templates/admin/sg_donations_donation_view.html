@@ -1,0 +1,89 @@
+<xf:title>{{ phrase('sg_donations_view_donation') }} #{{ $donation.donation_id }}</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <dl class="pairs pairs--columns pairs--fixedSmall">
+            <dt>{{ phrase('user') }}</dt>
+            <dd>{{ $donation.User ? $donation.User.username : $donation.user_id }}</dd>
+
+            <dt>{{ phrase('sg_donations_campaign_title') }}</dt>
+            <dd>{{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}</dd>
+
+            <dt>{{ phrase('sg_donations_tier_title') }}</dt>
+            <dd>{{ $donation.Tier ? $donation.Tier.title : $donation.tier_id }}</dd>
+
+            <dt>{{ phrase('sg_donations_tier_amount') }}</dt>
+            <dd>{{ number_format($donation.amount, 2) }}</dd>
+
+            <dt>{{ phrase('sg_donations_payment_ref') }}</dt>
+            <dd>{{ $donation.payment_ref ?: '—' }}</dd>
+
+            <dt>{{ phrase('status') }}</dt>
+            <dd>
+                <span class="badge badge--{{ $donation.status == 'applied' ? 'success' : ($donation.status == 'voided' ? 'danger' : 'info') }}">
+                    {{ phrase('sg_donations_status_' ~ $donation.status) }}
+                </span>
+            </dd>
+
+            <dt>{{ phrase('date') }}</dt>
+            <dd>{{ $xf.language.dateTime($donation.created_at) }}</dd>
+
+            <xf:if is="$donation.queued_until">
+                <dt>{{ phrase('sg_donations_queued_until') }}</dt>
+                <dd>{{ $xf.language.dateTime($donation.queued_until) }}</dd>
+            </xf:if>
+
+            <xf:if is="$donation.applied_at">
+                <dt>{{ phrase('sg_donations_status_applied') }}</dt>
+                <dd>{{ $xf.language.dateTime($donation.applied_at) }}</dd>
+            </xf:if>
+
+            <xf:if is="$donation.isVoided()">
+                <dt>{{ phrase('sg_donations_void_reason') }}</dt>
+                <dd>{{ $donation.void_reason }}</dd>
+                <dt>{{ phrase('voided_at') }}</dt>
+                <dd>{{ $xf.language.dateTime($donation.voided_at) }}</dd>
+            </xf:if>
+        </dl>
+    </div>
+</div>
+
+<xf:if is="$auditLogs|count">
+    <h3>{{ phrase('audit_log') }}</h3>
+    <div class="block">
+        <div class="block-container">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th>{{ phrase('date') }}</th>
+                        <th>{{ phrase('action') }}</th>
+                        <th>{{ phrase('admin') }}</th>
+                        <th>Before</th>
+                        <th>After</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xf:foreach loop="$auditLogs" value="$log">
+                        <tr>
+                            <td>{{ $xf.language.dateTime($log.event_date) }}</td>
+                            <td>{{ $log.action }}</td>
+                            <td>{{ $log.Admin ? $log.Admin.username : $log.admin_user_id }}</td>
+                            <td><code>{{ $log.before_json }}</code></td>
+                            <td><code>{{ $log.after_json }}</code></td>
+                        </tr>
+                    </xf:foreach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</xf:if>
+
+<div class="formSubmitRow">
+    <xf:if is="!$donation.isVoided() AND $xf.visitor.hasAdminPermission('sgDonations_voidDonation')">
+        <a class="button button--danger" href="{{ link('sg-donations/donations/void', $donation) }}">{{ phrase('sg_donations_void_donation') }}</a>
+    </xf:if>
+    <xf:if is="$xf.visitor.hasAdminPermission('sgDonations_addDonation')">
+        <a class="button" href="{{ link('sg-donations/donations/duplicate', $donation) }}">{{ phrase('sg_donations_duplicate_donation') }}</a>
+    </xf:if>
+    <a class="button" href="{{ link('sg-donations/donations') }}">{{ phrase('back') }}</a>
+</div>

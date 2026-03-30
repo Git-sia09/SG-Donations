@@ -1,0 +1,16 @@
+<xf:if is="$action == 'donation_added'">
+    {{ phrase('sg_donations_alert_donation_added', {
+        amount: $extra.amount is defined ? number_format($extra.amount, 2) : '—',
+        campaign_title: $extra.campaign_title is defined ? $extra.campaign_title : '—'
+    }) }}
+<xf:elseif is="$action == 'donation_voided'" />
+    {{ phrase('sg_donations_alert_donation_voided', {
+        campaign_title: $extra.campaign_title is defined ? $extra.campaign_title : '—'
+    }) }}
+<xf:elseif is="$action == 'donation_applied'" />
+    {{ phrase('sg_donations_alert_donation_applied', {
+        amount: $extra.amount is defined ? number_format($extra.amount, 2) : '—',
+        campaign_title: $extra.campaign_title is defined ? $extra.campaign_title : '—',
+        benefits_until: $extra.benefits_until is defined ? $extra.benefits_until : '—'
+    }) }}
+</xf:if>

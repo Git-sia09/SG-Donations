@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<admin_permissions>
+    <permission permission_id="sgDonations_viewDonations" addon_id="SG/Donations" display_order="10">
+        <title>SG Donations: View donations</title>
+    </permission>
+    <permission permission_id="sgDonations_addDonation" addon_id="SG/Donations" display_order="20">
+        <title>SG Donations: Add donations</title>
+    </permission>
+    <permission permission_id="sgDonations_voidDonation" addon_id="SG/Donations" display_order="30">
+        <title>SG Donations: Void donations</title>
+    </permission>
+    <permission permission_id="sgDonations_manageCampaigns" addon_id="SG/Donations" display_order="40">
+        <title>SG Donations: Manage campaigns &amp; tiers</title>
+    </permission>
+    <permission permission_id="sgDonations_manageWidget" addon_id="SG/Donations" display_order="50">
+        <title>SG Donations: Manage widget settings</title>
+    </permission>
+    <permission permission_id="sgDonations_exportCsv" addon_id="SG/Donations" display_order="60">
+        <title>SG Donations: Export CSV</title>
+    </permission>
+    <permission permission_id="sgDonations_rebuildStats" addon_id="SG/Donations" display_order="70">
+        <title>SG Donations: Rebuild statistics</title>
+    </permission>
+</admin_permissions>
