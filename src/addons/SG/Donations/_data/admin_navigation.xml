@@ -2,7 +2,7 @@
 <admin_navigation>
     <nav id="sgDonations" addon_id="SG/Donations" display_order="101" parent_id="home" icon="fa-heart">
         <title>SG Donations</title>
-        <link>sg-donations</link>
+        <link>sg-donations/</link>
         <admin_permission_id>sgDonations_viewDonations</admin_permission_id>
     </nav>
 
