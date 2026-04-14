@@ -20,7 +20,9 @@
                             <td>{{ $campaign.currency_label }} {{ number_format($tier.amount, 2) }}</td>
                             <td>{{ $tier.duration_months }}</td>
                             <td>
-                                <xf:toggle link="sg-donations/campaigns/tiers/toggle" item="$tier" />
+                                <a href="{{ link('route/to/toggle', $item) }}" data-xf-click="switch">
+  <i class="fa fa-{{ $item.active ? 'toggle-on' : 'toggle-off' }}"></i>
+</a>
                             </td>
                             <td class="dataTable-cell--control">
                                 <a class="button button--small button--link" href="{{ link('sg-donations/campaigns/tiers/edit', $tier) }}">{{ phrase('edit') }}</a>
