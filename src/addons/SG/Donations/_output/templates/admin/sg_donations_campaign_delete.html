@@ -1,10 +1,13 @@
 <xf:title>{{ phrase('sg_donations_delete_campaign') }}</xf:title>
 
 <div class="blockMessage blockMessage--iconic blockMessage--error">
-    <p>{{ phrase('confirm_delete_item', {item: $campaign.title}) }}</p>
+    <p>{{ phrase('confirm_delete_item', {'item': $campaign.title}) }}</p>
 </div>
 
 <form method="post" action="{{ link('sg-donations/campaigns/delete', $campaign) }}" class="block">
-    <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/campaigns') }}"> submit="{{ phrase('delete') }}"</xf:submitrow>
+    <xf:submitrow sticky="true"
+              icon="delete"
+              submit="{{ phrase('delete') }}"
+              cancel="{{ link('sg-donations/campaigns') }}" />
     <xf:csrf />
 </form>
