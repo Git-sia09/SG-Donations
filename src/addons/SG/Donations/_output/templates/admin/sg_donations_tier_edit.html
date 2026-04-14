@@ -24,13 +24,13 @@
 
         <xf:formrow label="{{ phrase('sg_donations_tier_user_groups') }}" explain="{{ phrase('sg_donations_restricted_group_not_allowed') }}">
             <xf:foreach loop="$groups" value="$group">
-                <label class="formRow-choice">
-                    <input type="checkbox"
-                           name="user_group_ids[]"
-                           value="{{ $group.user_group_id }}"
-                           {{ ($tier.user_group_ids is not empty && $group.user_group_id in $tier.user_group_ids) ? 'checked' : '' }} />
-                    {{ $group.title }}
-                </label>
+<label class="formRow-choice">
+    <input type="checkbox"
+           name="user_group_ids[]"
+           value="{{ $group.user_group_id }}"
+           {{ ($tier.user_group_ids is not empty && $group.user_group_id in $tier.user_group_ids) ? 'checked' : '' }} />
+    {{ $group.title }}
+</label>
             </xf:foreach>
         </xf:formrow>
 
