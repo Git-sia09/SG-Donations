@@ -16,7 +16,7 @@
                         <tr>
                             <td>{{ $stat.Campaign ? $stat.Campaign.title : $stat.campaign_id }}</td>
                             <td>{{ number_format($stat.raised_total, 2) }}</td>
-                            <td>{{ $stat.last_rebuild_at ? $xf.language.dateTime($stat.last_rebuild_at) : phrase('sg_donations_never_rebuilt') }}</td>
+                            <td>{{ $stat.last_rebuild_at ? date_time($stat.last_rebuild_at) : phrase('sg_donations_never_rebuilt') }}</td>
                         </tr>
                     </xf:foreach>
                 </tbody>
