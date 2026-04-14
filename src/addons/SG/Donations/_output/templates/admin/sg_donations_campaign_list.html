@@ -21,7 +21,11 @@
                                 <td>{{ $campaign.currency_label }}</td>
                                 <td>{{ number_format($campaign.goal_amount, 2) }}</td>
                                 <td>
-                                    <xf:toggle link="sg-donations/campaigns/toggle" item="$campaign" />
+                                    <a href="{{ link('sg-donations/campaigns/toggle', $campaign) }}"
+   data-xf-click="switch"
+   title="{{ $campaign.active ? phrase('disable') : phrase('enable') }}">
+    <i class="fa fa-{{ $campaign.active ? 'toggle-on' : 'toggle-off' }}"></i>
+</a>
                                 </td>
                                 <td class="dataTable-cell--control">
                                     <a class="button button--small" href="{{ link('sg-donations/campaigns/tiers', $campaign) }}">{{ phrase('sg_donations_tiers') }}</a>
