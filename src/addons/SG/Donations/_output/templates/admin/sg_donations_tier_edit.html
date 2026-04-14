@@ -26,7 +26,7 @@
             <xf:foreach loop="$groups" value="$group">
                 <label class="formRow-choice">
                     <input type="checkbox" name="user_group_ids[]" value="{{ $group.user_group_id }}"
-                        {{ ($tier.user_group_ids is not empty AND $group.user_group_id in $tier.user_group_ids) ? 'checked' : '' }} />
+                        {{ ($tier.user_group_ids is not empty && $group.user_group_id in $tier.user_group_ids) ? 'checked' : '' }}
                     {{ $group.title }}
                 </label>
             </xf:foreach>
@@ -40,7 +40,7 @@
             <xf:checkbox name="active" value="1" checked="{{ $tier.active }}" />
         </xf:formrow>
 
-        <xf:submitrow sticky="true" icon="save"> submit="{{ phrase('save') }}"</xf:submitrow>
+        <xf:submitrow sticky="true" icon="save" submit="{{ phrase('save') }}" />
     </div>
     <xf:csrf />
 </form>
