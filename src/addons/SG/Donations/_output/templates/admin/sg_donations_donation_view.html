@@ -26,23 +26,23 @@
             </dd>
 
             <dt>{{ phrase('date') }}</dt>
-            <dd>{{ $xf.language.dateTime($donation.created_at) }}</dd>
+            <dd>{{ date_time($donation.created_at) }}</dd>
 
             <xf:if is="$donation.queued_until">
                 <dt>{{ phrase('sg_donations_queued_until') }}</dt>
-                <dd>{{ $xf.language.dateTime($donation.queued_until) }}</dd>
+                <dd>{{ date_time($donation.queued_until) }}</dd>
             </xf:if>
 
             <xf:if is="$donation.applied_at">
                 <dt>{{ phrase('sg_donations_status_applied') }}</dt>
-                <dd>{{ $xf.language.dateTime($donation.applied_at) }}</dd>
+                <dd>{{ date_time($donation.applied_at) }}</dd>
             </xf:if>
 
             <xf:if is="$donation.isVoided()">
                 <dt>{{ phrase('sg_donations_void_reason') }}</dt>
                 <dd>{{ $donation.void_reason }}</dd>
                 <dt>{{ phrase('voided_at') }}</dt>
-                <dd>{{ $xf.language.dateTime($donation.voided_at) }}</dd>
+                <dd>{{ date_time($donation.voided_at) }}</dd>
             </xf:if>
         </dl>
     </div>
@@ -65,7 +65,7 @@
                 <tbody>
                     <xf:foreach loop="$auditLogs" value="$log">
                         <tr>
-                            <td>{{ $xf.language.dateTime($log.event_date) }}</td>
+                            <td>{{ date_time($log.event_date) }}</td>
                             <td>{{ $log.action }}</td>
                             <td>{{ $log.Admin ? $log.Admin.username : $log.admin_user_id }}</td>
                             <td><code>{{ $log.before_json }}</code></td>
