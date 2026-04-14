@@ -62,7 +62,7 @@
                             <td>{{ $donation.payment_ref }}</td>
                             <td>
                                 <span class="badge badge--{{ $donation.status == 'applied' ? 'success' : ($donation.status == 'voided' ? 'danger' : 'info') }}">
-                                    {{ phrase('sg_donations_status_' ~ $donation.status) }}
+                                    <xf:if is="$donation.status == 'applied'">{{ phrase('sg_donations_status_applied') }}<xf:elseif is="$donation.status == 'voided'" />{{ phrase('sg_donations_status_voided') }}<xf:else />{{ phrase('sg_donations_status_queued') }}</xf:if>
                                 </span>
                             </td>
                             <td>{{ $xf.language.date($donation.created_at) }}</td>
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <xf:page-nav page="$page" per-page="$perPage" total="$total" />
+    <xf:pagenav page="$page" per-page="$perPage" total="$total" />
 <xf:else />
     <div class="blockMessage">{{ phrase('no_results_found') }}</div>
 </xf:if>

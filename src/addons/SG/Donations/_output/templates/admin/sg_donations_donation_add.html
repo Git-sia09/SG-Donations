@@ -4,9 +4,9 @@
     <div class="block-container">
 
         <!-- User Selection -->
-        <xf:form-row label="{{ phrase('sg_donations_select_user') }}">
+        <xf:formrow label="{{ phrase('sg_donations_select_user') }}">
             <xf:username name="user_id" value="{{ $prefilledUser ? $prefilledUser.username : '' }}" user-id="{{ $prefill.user_id }}" required="true" class="input" />
-        </xf:form-row>
+        </xf:formrow>
 
         <!-- User Preview Panel (AJAX) -->
         <div id="sg-user-preview" class="block-container" style="{{ $prefilledUser ? '' : 'display:none;' }}">
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Campaign Selection -->
-        <xf:form-row label="{{ phrase('sg_donations_select_campaign') }}">
+        <xf:formrow label="{{ phrase('sg_donations_select_campaign') }}">
             <select name="campaign_id" id="sg-campaign-select" class="input" required>
                 <option value="">— {{ phrase('sg_donations_select_campaign') }} —</option>
                 <xf:foreach loop="$campaigns" value="$campaign">
@@ -25,10 +25,10 @@
                     </option>
                 </xf:foreach>
             </select>
-        </xf:form-row>
+        </xf:formrow>
 
         <!-- Tier Selection (populated via AJAX or static render) -->
-        <xf:form-row label="{{ phrase('sg_donations_select_tier') }}">
+        <xf:formrow label="{{ phrase('sg_donations_select_tier') }}">
             <select name="tier_id" id="sg-tier-select" class="input" required>
                 <option value="">— {{ phrase('sg_donations_select_tier') }} —</option>
                 <xf:foreach loop="$campaigns" value="$campaign">
@@ -44,19 +44,19 @@
                     </xf:foreach>
                 </xf:foreach>
             </select>
-        </xf:form-row>
+        </xf:formrow>
 
         <!-- Payment Reference (required for duplicate/new, blank is NOT allowed for duplicate) -->
-        <xf:form-row label="{{ phrase('sg_donations_payment_ref') }}" explain="Required. Must be unique per donation.">
+        <xf:formrow label="{{ phrase('sg_donations_payment_ref') }}" explain="Required. Must be unique per donation.">
             <input type="text" name="payment_ref" value="" class="input" required />
-        </xf:form-row>
+        </xf:formrow>
 
         <!-- Queued Until -->
-        <xf:form-row label="{{ phrase('sg_donations_queued_until') }}" explain="Leave blank to make eligible immediately.">
+        <xf:formrow label="{{ phrase('sg_donations_queued_until') }}" explain="Leave blank to make eligible immediately.">
             <input type="datetime-local" name="queued_until" value="" class="input" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:submit-row sticky="true" icon="save">{{ phrase('sg_donations_add_donation') }}</xf:submit-row>
+        <xf:submitrow sticky="true" icon="save">{{ phrase('sg_donations_add_donation') }}</xf:submitrow>
     </div>
     <xf:token />
 </form>

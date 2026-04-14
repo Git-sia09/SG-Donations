@@ -6,19 +6,19 @@
         <strong>{{ phrase('user') }}:</strong> {{ $donation.User ? $donation.User.username : $donation.user_id }}<br />
         <strong>{{ phrase('sg_donations_campaign_title') }}:</strong> {{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}<br />
         <strong>{{ phrase('sg_donations_tier_amount') }}:</strong> {{ number_format($donation.amount, 2) }}<br />
-        <strong>{{ phrase('status') }}:</strong> {{ phrase('sg_donations_status_' ~ $donation.status) }}
+        <strong>{{ phrase('status') }}:</strong> <xf:if is="$donation.status == 'applied'">{{ phrase('sg_donations_status_applied') }}<xf:elseif is="$donation.status == 'voided'" />{{ phrase('sg_donations_status_voided') }}<xf:else />{{ phrase('sg_donations_status_queued') }}</xf:if>
     </p>
 </div>
 
 <form method="post" action="{{ link('sg-donations/donations/void', $donation) }}" class="block">
     <div class="block-container">
-        <xf:form-row label="{{ phrase('sg_donations_void_reason') }}" required="true">
+        <xf:formrow label="{{ phrase('sg_donations_void_reason') }}" required="true">
             <textarea name="void_reason" class="input" rows="3" required placeholder="{{ phrase('sg_donations_void_reason_required') }}"></textarea>
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:submit-row sticky="true" icon="delete" cancel="{{ link('sg-donations/donations/view', $donation) }}">
+        <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/donations/view', $donation) }}">
             {{ phrase('sg_donations_void_donation') }}
-        </xf:submit-row>
+        </xf:submitrow>
     </div>
     <xf:token />
 </form>

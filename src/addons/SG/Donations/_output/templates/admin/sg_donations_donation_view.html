@@ -21,7 +21,7 @@
             <dt>{{ phrase('status') }}</dt>
             <dd>
                 <span class="badge badge--{{ $donation.status == 'applied' ? 'success' : ($donation.status == 'voided' ? 'danger' : 'info') }}">
-                    {{ phrase('sg_donations_status_' ~ $donation.status) }}
+                    <xf:if is="$donation.status == 'applied'">{{ phrase('sg_donations_status_applied') }}<xf:elseif is="$donation.status == 'voided'" />{{ phrase('sg_donations_status_voided') }}<xf:else />{{ phrase('sg_donations_status_queued') }}</xf:if>
                 </span>
             </dd>
 

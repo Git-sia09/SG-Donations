@@ -2,39 +2,39 @@
 
 <form method="post" action="{{ link('sg-donations/campaigns/save', $campaign) }}" class="block">
     <div class="block-container">
-        <xf:form-row label="{{ phrase('sg_donations_campaign_title') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_title') }}">
             <input type="text" name="title" value="{{ $campaign.title }}" class="input" required />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_description') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_description') }}">
             <textarea name="description" class="input" rows="4">{{ $campaign.description }}</textarea>
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_currency_label') }}" explain="{{ phrase('sg_donations_currency_label_required') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_currency_label') }}" explain="{{ phrase('sg_donations_currency_label_required') }}">
             <input type="text" name="currency_label" value="{{ $campaign.currency_label ?: 'USD' }}" class="input" maxlength="10" required />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_goal_amount') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_goal_amount') }}">
             <input type="number" name="goal_amount" value="{{ $campaign.goal_amount }}" class="input" min="0" step="0.01" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_start_date') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_start_date') }}">
             <input type="datetime-local" name="start_date" value="{{ $campaign.start_date ? date('Y-m-d\TH:i', $campaign.start_date) : '' }}" class="input" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_end_date') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_end_date') }}">
             <input type="datetime-local" name="end_date" value="{{ $campaign.end_date ? date('Y-m-d\TH:i', $campaign.end_date) : '' }}" class="input" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_display_order') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_display_order') }}">
             <input type="number" name="display_order" value="{{ $campaign.display_order ?: 10 }}" class="input" min="0" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:form-row label="{{ phrase('sg_donations_campaign_active') }}">
+        <xf:formrow label="{{ phrase('sg_donations_campaign_active') }}">
             <xf:checkbox name="active" value="1" checked="{{ $campaign.active }}" />
-        </xf:form-row>
+        </xf:formrow>
 
-        <xf:submit-row sticky="true" icon="save">{{ phrase('save') }}</xf:submit-row>
+        <xf:submitrow sticky="true" icon="save">{{ phrase('save') }}</xf:submitrow>
     </div>
     <xf:token />
 </form>
