@@ -16,8 +16,10 @@
             <textarea name="void_reason" class="input" rows="3" required placeholder="{{ phrase('sg_donations_void_reason_required') }}"></textarea>
         </xf:formrow>
 
-        <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/donations/view', $donation) }}">
-            {{ phrase('sg_donations_void_donation') }}
+        <xf:submitrow sticky="true"
+              icon="delete"
+              submit="{{ phrase('sg_donations_void_donation') }}"
+              cancel="{{ link('sg-donations/donations/view', $donation) }}" />
         </xf:submitrow>
     </div>
     <xf:token />
