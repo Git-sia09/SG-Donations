@@ -18,8 +18,8 @@
                     <tr>
                         <td>{{ $membership.Campaign ? $membership.Campaign.title : $membership.campaign_id }}</td>
                         <td>{{ $membership.Tier ? $membership.Tier.title : $membership.tier_id }}</td>
-                        <td>{{ date($membership.start_date) }}</td>
-                        <td>{{ date($membership.end_date) }}</td>
+                        <td>{{ date_time($membership.start_date) }}</td>
+                        <td>{{ date_time($membership.end_date) }}</td>
                         <td>
                             <xf:if is="$membership.isActive()">
                                 <span class="badge badge--success">{{ phrase('active') }}</span>
