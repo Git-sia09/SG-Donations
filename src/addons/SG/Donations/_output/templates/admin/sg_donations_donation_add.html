@@ -60,7 +60,9 @@
             <input type="datetime-local" name="queued_until" value="" class="input" />
         </xf:formrow>
 
-        <xf:submitrow sticky="true" icon="save"> submit="{{ phrase('sg_donations_add_donation') }}"</xf:submitrow>
+        <xf:submitrow sticky="true"
+              icon="save"
+              submit="{{ phrase('sg_donations_add_donation') }}" />
     </div>
     <xf:csrf />
 </form>
