@@ -11,7 +11,7 @@
         <!-- User Preview Panel (AJAX) -->
         <div id="sg-user-preview" class="block-container" style="{{ $prefilledUser ? '' : 'display:none;' }}">
             <xf:if is="$prefilledUser">
-                {{ include_template('sg_donations_donation_user_preview', {user: $prefilledUser, memberships: [], queued: []}) }}
+                {{ include_template('sg_donations_donation_user_preview', {'user': $prefilledUser, 'memberships': [], 'queued': []}) }}
             </xf:if>
         </div>
 
