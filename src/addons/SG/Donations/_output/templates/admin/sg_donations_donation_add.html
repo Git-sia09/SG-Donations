@@ -5,7 +5,11 @@
 
         <!-- User Selection -->
         <xf:formrow label="{{ phrase('sg_donations_select_user') }}">
-            <xf:username name="user_id" value="{{ $prefilledUser ? $prefilledUser.username : '' }}" user-id="{{ $prefill.user_id }}" required="true" class="input" />
+            <xf:username name="user_id"
+             value="{{ $prefilledUser ? $prefilledUser.username : '' }}"
+             user="{$prefilledUser}"
+             required="true"
+             class="input" />
         </xf:formrow>
 
         <!-- User Preview Panel (AJAX) -->
