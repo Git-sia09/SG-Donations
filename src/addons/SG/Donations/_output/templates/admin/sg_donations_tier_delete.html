@@ -6,5 +6,5 @@
 
 <form method="post" action="{{ link('sg-donations/campaigns/tiers/delete', $tier) }}" class="block">
     <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/campaigns/tiers', $campaign) }}">{{ phrase('delete') }}</xf:submitrow>
-    <xf:token />
+    <xf:csrf />
 </form>
