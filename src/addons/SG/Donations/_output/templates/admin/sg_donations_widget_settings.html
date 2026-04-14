@@ -33,7 +33,7 @@
             <input type="number" name="ticker_speed" value="{{ $settings.ticker_speed }}" class="input" min="5" max="120" />
         </xf:formrow>
 
-        <xf:submitrow sticky="true" icon="save">{{ phrase('save') }}</xf:submitrow>
+        <xf:submitrow sticky="true" icon="save"> submit="{{ phrase('save') }}"</xf:submitrow>
     </div>
     <xf:csrf />
 </form>
