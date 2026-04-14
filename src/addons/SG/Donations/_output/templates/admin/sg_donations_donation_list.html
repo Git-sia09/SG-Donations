@@ -65,7 +65,7 @@
                                     <xf:if is="$donation.status == 'applied'">{{ phrase('sg_donations_status_applied') }}<xf:elseif is="$donation.status == 'voided'" />{{ phrase('sg_donations_status_voided') }}<xf:else />{{ phrase('sg_donations_status_queued') }}</xf:if>
                                 </span>
                             </td>
-                            <td>{{ $xf.language.date($donation.created_at) }}</td>
+                            <<td>{{ date_time($donation.created_at) }}</td>
                             <td class="dataTable-cell--control">
                                 <a class="button button--small" href="{{ link('sg-donations/donations/view', $donation) }}">{{ phrase('view') }}</a>
                                 <xf:if is="!$donation.isVoided() AND $xf.visitor.hasAdminPermission('sgDonations_voidDonation')">
