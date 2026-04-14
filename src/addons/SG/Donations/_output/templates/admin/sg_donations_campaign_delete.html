@@ -5,6 +5,6 @@
 </div>
 
 <form method="post" action="{{ link('sg-donations/campaigns/delete', $campaign) }}" class="block">
-    <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/campaigns') }}">{{ phrase('delete') }}</xf:submitrow>
+    <xf:submitrow sticky="true" icon="delete" cancel="{{ link('sg-donations/campaigns') }}"> submit="{{ phrase('delete') }}"</xf:submitrow>
     <xf:csrf />
 </form>
