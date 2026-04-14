@@ -52,7 +52,7 @@
                         <td>{{ $donation.donation_id }}</td>
                         <td>{{ $donation.Campaign ? $donation.Campaign.title : $donation.campaign_id }}</td>
                         <td>{{ number_format($donation.amount, 2) }}</td>
-                        <td>{{ $donation.queued_until ? $xf.language.date($donation.queued_until) : '—' }}</td>
+                        <td>{{ $donation.queued_until ? date_time($donation.queued_until) : '—' }}</td>
                     </tr>
                 </xf:foreach>
             </tbody>
